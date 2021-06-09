@@ -83,6 +83,7 @@ inputs:
     description: 'Path to the pre-commit script file'
     required: false
 
+
   fallback-version:
     description: 'The fallback version, if no older one can be detected, or if it is the first one'
     default: '0.1.0'
@@ -90,6 +91,11 @@ inputs:
 
   config-file-path:
     description: 'Path to the conventional changelog config file. If set, the preset setting will be ignored'
+    required: false
+
+  commit-path:
+    description: 'The path to the package'
+    default: './'
     required: false
 
   pre-changelog-generation:
