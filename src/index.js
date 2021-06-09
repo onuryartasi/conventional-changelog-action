@@ -70,11 +70,18 @@ async function run() {
 
     const config = conventionalConfigFile && requireScript(conventionalConfigFile)
     const gitRawCommitsOpts = {}
+    const options = {
+      preset,
+      tagPrefix,
+      config
+    }
     if (commitPath) {
       gitRawCommitsOpts.path = commitPath
+      options.path = commitPath
     }
 
-    conventionalRecommendedBump({ preset, tagPrefix, config }, async(error, recommendation) => {
+
+    conventionalRecommendedBump(options, async(error, recommendation) => {
       if (error) {
         core.setFailed(error.message)
         return
