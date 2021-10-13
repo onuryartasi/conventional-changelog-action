@@ -121,6 +121,9 @@ module.exports = new (class Git {
    */
   push = () => (
     this.exec(`push origin ${branch} --follow-tags`)
+    .catch((err)=>{
+      core.setFaild(err.message) //Detect push error and
+    })
   )
 
   /**
