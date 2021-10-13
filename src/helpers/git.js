@@ -57,13 +57,17 @@ module.exports = new (class Git {
       },
     }
 
-    const exitCode = await exec.exec(`git ${command}`, null, options)
+    try {
+      const exitCode = await exec.exec(`git ${command}`, null, options)
 
-    if (exitCode === 0) {
-      resolve(execOutput)
-
-    } else {
+      if (exitCode === 0) {
+        resolve(execOutput)
+  
+      }
+      
       reject(new Error(`Command "git ${command}" exited with code ${exitCode}.`))
+    } catch(e) {
+      reject(new Error(`Command "git ${command}" exited with code ${exitCode} with exec function.`))
     }
   })
 
