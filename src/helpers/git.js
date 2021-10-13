@@ -65,12 +65,12 @@ module.exports = new (class Git {
   
       }
       else {
-
         reject(new Error(`Command "git ${command}" exited with code ${exitCode}.`))
       }
 
     } catch(e) {
-      reject(new Error(`Command "git ${command}" exited with code ${exitCode} with exec function.`))
+      core.setFailed(e.message)
+      reject(new Error(`Exec error: ${e}`))
     }
   })
 
