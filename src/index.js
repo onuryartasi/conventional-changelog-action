@@ -153,6 +153,7 @@ async function run() {
       if (skipEmptyRelease && cleanChangelog === '') {
         core.info('Generated changelog is empty and skip-on-empty has been activated so we skip this step')
         core.setOutput('skipped', 'true')
+        core.setFailed("Commits not found about this package.")
         return
       }
 
