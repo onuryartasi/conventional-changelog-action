@@ -137,6 +137,9 @@ module.exports = new (class Git {
     }
 
     const isShallow = await this.exec('rev-parse --is-shallow-repository')
+    .catch((err)=>{
+      core.setFaild(err.message) //Detect push error and
+    })
 
     return isShallow.trim().replace('\n', '') === 'true'
   }
@@ -148,6 +151,9 @@ module.exports = new (class Git {
    * @return {Promise<>}
    */
   updateOrigin = (repo) => this.exec(`remote set-url origin ${repo}`)
+  .catch((err)=>{
+    core.setFaild(err.message) //Detect push error and
+  })
 
   /**
    * Creates git tag
@@ -155,7 +161,13 @@ module.exports = new (class Git {
    * @param tag
    * @return {Promise<>}
    */
-  createTag = (tag) => this.exec(`tag -a ${tag} -m "${tag}"`)
+  createTag = (tag) => {
+    this.exec(`tag -a ${tag} -m "${tag}"`)
+    .catch((err)=>{
+      core.setFaild(err.message) //Detect push error and
+    })
+  }
+
 
   /**
    * Validates the commands run
