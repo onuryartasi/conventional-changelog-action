@@ -64,8 +64,11 @@ module.exports = new (class Git {
         resolve(execOutput)
   
       }
-      
-      reject(new Error(`Command "git ${command}" exited with code ${exitCode}.`))
+      else {
+
+        reject(new Error(`Command "git ${command}" exited with code ${exitCode}.`))
+      }
+
     } catch(e) {
       reject(new Error(`Command "git ${command}" exited with code ${exitCode} with exec function.`))
     }
