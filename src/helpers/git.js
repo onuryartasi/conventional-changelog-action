@@ -127,7 +127,7 @@ module.exports = new (class Git {
    * @return {Promise<>}
    */
   push = () => (
-    this.exec(`push origin ${branch} --follow-tags`)
+    this.exec(`push origin ${branch} --atomic --follow-tags`)
   )
 
   /**
