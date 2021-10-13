@@ -48,6 +48,7 @@ module.exports = new (class Git {
    */
   exec = (command) => new Promise(async(resolve, reject) => {
     let execOutput = ''
+    let exitCode = 0
 
     const options = {
       listeners: {
@@ -58,7 +59,7 @@ module.exports = new (class Git {
     }
 
     try {
-      const exitCode = await exec.exec(`git ${command}`, null, options)
+      exitCode = await exec.exec(`git ${command}`, null, options)
     } catch (error){
       core.setFailed(`We occured error when pushing code: ${error.message}`)
     }
