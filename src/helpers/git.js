@@ -48,7 +48,6 @@ module.exports = new (class Git {
    */
   exec = (command) => new Promise(async(resolve, reject) => {
     let execOutput = ''
-    let exitCode = 0
 
     const options = {
       listeners: {
@@ -58,18 +57,13 @@ module.exports = new (class Git {
       },
     }
 
-    try {
-      exitCode = await exec.exec(`git ${command}`, null, options)
-    } catch (error){
-      core.setFailed(`We occured error when pushing code: ${error.message}`)
-    }
-    
+    const exitCode = await exec.exec(`git ${command}`, null, options)
 
     if (exitCode === 0) {
       resolve(execOutput)
 
     } else {
-      reject(`Command "git ${command}" exited with code ${exitCode}.`)
+      reject(new Error(`Command "git ${command}" exited with code ${exitCode}.`))
     }
   })
 
@@ -140,9 +134,6 @@ module.exports = new (class Git {
     }
 
     const isShallow = await this.exec('rev-parse --is-shallow-repository')
-    .catch((err)=>{
-      core.setFaild(err.message) //Detect push error and
-    })
 
     return isShallow.trim().replace('\n', '') === 'true'
   }
