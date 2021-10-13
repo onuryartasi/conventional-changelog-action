@@ -148,9 +148,6 @@ module.exports = new (class Git {
    * @return {Promise<>}
    */
   updateOrigin = (repo) => this.exec(`remote set-url origin ${repo}`)
-  .catch((err)=>{
-    core.setFaild(err.message) //Detect push error and
-  })
 
   /**
    * Creates git tag
@@ -160,9 +157,6 @@ module.exports = new (class Git {
    */
   createTag = (tag) => {
     this.exec(`tag -a ${tag} -m "${tag}"`)
-    .catch((err)=>{
-      core.setFaild(err.message) //Detect push error and
-    })
   }
 
 

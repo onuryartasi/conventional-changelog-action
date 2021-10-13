@@ -187,10 +187,12 @@ async function run() {
       await git.createTag(gitTag)
 
       core.info('Push all changes')
-      await git.push().catch((err) => {
-        core.setFailed(err.message);
-      })
-
+      try {
+        await git.push()
+      } catch (error){
+        core.setFailed(`We occured error when pushing code: ${error.message}`)
+      }
+     
       // Set outputs so other actions (for example actions/create-release) can use it
       core.setOutput('changelog', stringChangelog)
       core.setOutput('clean_changelog', cleanChangelog)
