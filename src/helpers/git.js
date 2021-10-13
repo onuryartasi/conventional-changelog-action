@@ -57,7 +57,12 @@ module.exports = new (class Git {
       },
     }
 
-    const exitCode = await exec.exec(`git ${command}`, null, options)
+    try {
+      const exitCode = await exec.exec(`git ${command}`, null, options)
+    } catch (error){
+      core.setFailed(`We occured error when pushing code: ${error.message}`)
+    }
+    
 
     if (exitCode === 0) {
       resolve(execOutput)
