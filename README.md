@@ -236,3 +236,4 @@ Conventional Changelog Action is [MIT licensed](./LICENSE).
 ## Collaboration
 
 If you have questions or [issues](https://github.com/TriPSs/conventional-changelog-action/issues), please [open an issue](https://github.com/TriPSs/conventional-changelog-action/issues/new)!
+
